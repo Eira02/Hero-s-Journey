@@ -15,12 +15,11 @@ class MapTiles(Tile):
         if self.is_flipped:
             self.image = pygame.image.load(path)
         else:
-            self.image = pygame.image.load('../graphics/card_back.png')
+            self.image = pygame.image.load('graphics/card_back.png')
 
-    def flip(self, mouse_pos):
-        if self.rect.collidepoint(mouse_pos):
-            self.image = self.front
-            self.is_flipped = True
+    def flip(self):
+        self.image = self.front
+        self.is_flipped = True
 
 class RiverTiles(Tile):
     def __init__(self, x, y, path):

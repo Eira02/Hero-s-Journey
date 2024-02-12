@@ -22,8 +22,6 @@ class Level:
         river_layout = import_csv_layout(level_data['card_front_river'])
         self.river_sprites = self.create_tile_group(river_layout, 'card_front_river')
 
-
-
     def create_tile_group(self, layout, type):
         sprite_group = pygame.sprite.Group()
 
@@ -34,19 +32,19 @@ class Level:
                     y = (row_index * 154) + 6
 
                     if type == 'card_front_forest':
-                        sprite = MapTiles(x, y, '../graphics/card_front_forest.png')
+                        sprite = MapTiles(x, y, 'graphics/card_front_forest.png')
                         sprite_group.add(sprite)
 
                     if type == 'card_front_meadow':
-                        sprite = MapTiles(x, y, '../graphics/card_front_meadow.png')
+                        sprite = MapTiles(x, y, 'graphics/card_front_meadow.png')
                         sprite_group.add(sprite)
 
                     if type == 'card_front_path':
-                        sprite = MapTiles(x, y, '../graphics/card_front_path.png')
+                        sprite = MapTiles(x, y, 'graphics/card_front_path.png')
                         sprite_group.add(sprite)
 
                     if type == 'card_front_river':
-                        sprite = RiverTiles(x, y, '../graphics/card_front_river.png')
+                        sprite = RiverTiles(x, y, 'graphics/card_front_river.png')
                         sprite_group.add(sprite)
 
         return sprite_group
