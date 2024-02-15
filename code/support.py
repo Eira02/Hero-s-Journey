@@ -1,5 +1,6 @@
 from csv import reader
 
+
 def import_csv_layout(path):
     card_map = []
     with open(path) as map:

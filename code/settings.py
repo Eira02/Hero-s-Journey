@@ -1,8 +1,4 @@
-vertical_tile_number = 15
-horizontal_tile_number = 30
-
-tile_height = 154
 tile_width = 106
+tile_height = 154
 
-screen_height = vertical_tile_number * tile_height
-screen_width = horizontal_tile_number * tile_width
+starting_player_pos = ((4 * tile_width) + 56, (7 * tile_height) + 80)

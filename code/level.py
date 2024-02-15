@@ -1,8 +1,7 @@
 import pygame
-import game_data
 from support import import_csv_layout
-from tiles import Tile, MapTiles, RiverTiles
-from settings import tile_height, tile_width
+from tiles import Tile, MapTiles
+
 
 class Level:
     def __init__(self, level_data, surface):
@@ -44,7 +43,7 @@ class Level:
                         sprite_group.add(sprite)
 
                     if type == 'card_front_river':
-                        sprite = RiverTiles(x, y, 'graphics/card_front_river.png')
+                        sprite = Tile(x, y, 'graphics/card_front_river.png')
                         sprite_group.add(sprite)
 
         return sprite_group
