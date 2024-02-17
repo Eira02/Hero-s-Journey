@@ -7,6 +7,7 @@ from battle import *
 
 screen = pygame.display.set_mode((screen_width, screen_height))
 
+# Level sprites
 player_sprite = Player(starting_player_pos)
 player_list = pygame.sprite.Group()
 player_list.add(player_sprite)
@@ -26,41 +27,25 @@ level.path_sprites, level.river_sprites, player_sprite
 
 player_sprite.focus_camera(screen, all_sprites)
 
-
+# Battle sprites
 sword_sprites = []
-sword_sprites.append(pygame.image.load('graphics/sword_animation_1.png'))
-sword_sprites.append(pygame.image.load('graphics/sword_animation_2.png'))
-sword_sprites.append(pygame.image.load('graphics/sword_animation_3.png'))
-sword_sprites.append(pygame.image.load('graphics/sword_animation_4.png'))
-sword_sprites.append(pygame.image.load('graphics/sword_animation_5.png'))
-sword_sprites.append(pygame.image.load('graphics/sword_animation_6.png'))
-sword_sprites.append(pygame.image.load('graphics/sword_animation_7.png'))
+for i in range(1, 8):
+    image_path = f'graphics/sword_animation_{i}.png'
+    sword_sprites.append(pygame.image.load(image_path))
 
 fire_sprites = []
-fire_sprites.append(pygame.image.load('graphics/fire_animation_1.png'))
-fire_sprites.append(pygame.image.load('graphics/fire_animation_2.png'))
-fire_sprites.append(pygame.image.load('graphics/fire_animation_3.png'))
-fire_sprites.append(pygame.image.load('graphics/fire_animation_4.png'))
-fire_sprites.append(pygame.image.load('graphics/fire_animation_5.png'))
-fire_sprites.append(pygame.image.load('graphics/fire_animation_6.png'))
-fire_sprites.append(pygame.image.load('graphics/fire_animation_7.png'))
-fire_sprites.append(pygame.image.load('graphics/fire_animation_8.png'))
-fire_sprites.append(pygame.image.load('graphics/fire_animation_9.png'))
+for i in range(1, 10):
+    image_path = f'graphics/fire_animation_{i}.png'
+    fire_sprites.append(pygame.image.load(image_path))
 
 heal_sprites = []
-heal_sprites.append(pygame.image.load('graphics/heal_animation_1.png'))
-heal_sprites.append(pygame.image.load('graphics/heal_animation_2.png'))
-heal_sprites.append(pygame.image.load('graphics/heal_animation_3.png'))
-heal_sprites.append(pygame.image.load('graphics/heal_animation_4.png'))
-heal_sprites.append(pygame.image.load('graphics/heal_animation_5.png'))
-heal_sprites.append(pygame.image.load('graphics/heal_animation_6.png'))
-heal_sprites.append(pygame.image.load('graphics/heal_animation_7.png'))
-heal_sprites.append(pygame.image.load('graphics/heal_animation_8.png'))
-heal_sprites.append(pygame.image.load('graphics/heal_animation_9.png'))
+for i in range(1, 10):
+    image_path = f'graphics/heal_animation_{i}.png'
+    heal_sprites.append(pygame.image.load(image_path))
 
-sword_attack = Abilities((600, 400), sword_sprites, 3, True)
-fire_attack = Abilities((800, 400), fire_sprites, 3, False)
-heal_spell = Abilities((1000, 400), heal_sprites, -3, False)
+sword_attack = Abilities((600, 400), sword_sprites, 3)
+fire_attack = Abilities((800, 400), fire_sprites, 3)
+heal_spell = Abilities((1000, 400), heal_sprites, -3)
 
 ability_sprites = pygame.sprite.Group()
 ability_sprites.add(sword_attack, fire_attack, heal_spell)

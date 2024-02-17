@@ -4,11 +4,27 @@ from tiles import Tile, MapTiles
 
 
 class Level:
+    """
+    Class representing a game level.
+
+    Attributes:
+        display_surface (pygame.Surface): The surface to display the level on.
+        forest_sprites (pygame.sprite.Group): Sprite group for forest tiles.
+        meadow_sprites (pygame.sprite.Group): Sprite group for meadow tiles.
+        path_sprites (pygame.sprite.Group): Sprite group for path tiles.
+        river_sprites (pygame.sprite.Group): Sprite group for river tiles.
+    """
+
     def __init__(self, level_data, surface):
-        # general setup
+        """
+        Initializes the level with the given data.
+
+        Args:
+            level_data (dict): A dictionary containing level data.
+            surface (pygame.Surface): The surface to display the level on.
+        """
         self.display_surface = surface
 
-        # cards setup
         forest_layout = import_csv_layout(level_data['card_front_forest'])
         self.forest_sprites = self.create_tile_group(forest_layout, 'card_front_forest')
 
@@ -22,6 +38,16 @@ class Level:
         self.river_sprites = self.create_tile_group(river_layout, 'card_front_river')
 
     def create_tile_group(self, layout, type):
+        """
+        Creates a group of tiles based on the provided layout and type.
+
+        Args:
+            layout (list): A 2D list representing the tile layout.
+            type (str): The type of tiles to create.
+
+        Returns:
+            pygame.sprite.Group: A sprite group containing the created tiles.
+        """
         sprite_group = pygame.sprite.Group()
 
         for row_index, row in enumerate(layout):
@@ -49,7 +75,7 @@ class Level:
         return sprite_group
 
     def run(self):
-        # run the entire level
+        """Runs the entire level, displaying all tiles on the screen."""
         background = pygame.image.load('graphics/background.png')
         self.display_surface.blit(background, (0, 0))
 

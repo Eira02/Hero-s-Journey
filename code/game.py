@@ -8,7 +8,10 @@ probability_threshold = 0.15
 
 
 class Game():
+    """Class representing the main game."""
+
     def __init__(self):
+        """Initialize the game."""
         pygame.init()
         pygame.display.set_caption("Hero's Journey")
 
@@ -24,6 +27,7 @@ class Game():
         self.states = {'start': self.start, 'level': self.level, 'battle': self.battle}
 
     def run(self):
+        """Main game loop."""
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -37,11 +41,15 @@ class Game():
 
 
 class Start:
+    """Class representing the start state of the game."""
+
     def __init__(self, display, game_state_manager):
+        """Initialize the start state."""
         self.display = display
         self.game_state_manager = game_state_manager
     
     def run(self):
+        """Run the start state."""
         start_background = pygame.image.load('graphics/start_bg_1.png')
         start_rect = start_background.get_rect(topleft = (0, 0))
         transformed_image = pygame.transform.scale(start_background, (1500, 700))
@@ -53,11 +61,15 @@ class Start:
 
 
 class LevelState:
+    """Class representing the level state of the game."""
+
     def __init__(self, display, game_state_manager):
+        """Run the level state."""
         self.display = display
         self.game_state_manager = game_state_manager
     
     def run(self):
+        """Run the level state."""
         keyboard_camera_control(all_sprites)
         
         level.run()
@@ -87,11 +99,15 @@ class LevelState:
 
 
 class BattleState:
+    """Class representing the battle state of the game."""
+
     def __init__(self, display, game_state_manager):
+        """Initialize the battle state."""
         self.display = display
         self.game_state_manager = game_state_manager
     
     def run(self):
+        """Run the battle state."""
         initiate_battle.run()
 
         for event in pygame.event.get():
@@ -104,6 +120,7 @@ class BattleState:
             self.game_state_manager.set_state('level')
 
     def test_run(self):
+        """Function for testing the battle turns."""
         ability_cooldown = 0
         ability_wait_time = 90
 
@@ -146,13 +163,18 @@ class BattleState:
 
 
 class GameStateManager:
+    """Class representing the game state manager."""
+
     def __init__(self, current_state):
+        """Initialize the game state manager."""
         self.current_state = current_state
 
     def get_state(self):
+        """Get the current game state."""
         return self.current_state
     
     def set_state(self, state):
+        """Set the game state."""
         self.current_state = state
 
 if __name__ == '__main__':

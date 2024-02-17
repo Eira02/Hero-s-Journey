@@ -6,7 +6,16 @@ TURN_DELAY = 2000
 
 
 class Abilities(pygame.sprite.Sprite):
-    def __init__(self, pos, sprites, damage, is_player):
+    """
+    A class representing abilities of characters.
+
+    Attributes:
+        pos (tuple): The position of the ability on the screen.
+        sprites (list): List of images representing the ability.
+        damage (int): The damage caused by the ability.
+    """
+     
+    def __init__(self, pos, sprites, damage):
         super().__init__()
 
         self.sprites = sprites
@@ -14,9 +23,9 @@ class Abilities(pygame.sprite.Sprite):
         self.image = self.sprites[self.current_sprite]
         self.rect = self.image.get_rect(topleft = pos)
         self.damage = damage
-        self.is_player = is_player
 
     def update(self):
+        """Update method to cycle through ability sprites."""
         self.current_sprite += 0.5
         if self.current_sprite >= len(self.sprites):
             self.current_sprite = 0
@@ -25,6 +34,20 @@ class Abilities(pygame.sprite.Sprite):
 
 
 class BattleCard(pygame.sprite.Sprite):
+    """
+    A class representing a character battle card.
+
+    Attributes:
+        pos (tuple): The position of the character on the screen.
+        path (str): The file path to the character's image.
+        max_hp (int): The maximum health points of the character.
+        alive (bool): Indicates whether the character is alive.
+        ability_sprites (pygame.sprite.Group): Group containing ability sprites associated with the character.
+        is_player (bool): Indicates whether the character is the player or enemy.
+        shown_turn (bool): Indicates whether it's the character's turn and the turn is shown.
+        original_image (pygame.Surface): The original image of the character.
+    """
+
     def __init__(self, pos, path, max_hp, alive, ability_sprites, is_player, shown_turn):
         super().__init__()
 
@@ -41,6 +64,7 @@ class BattleCard(pygame.sprite.Sprite):
         self.original_image = pygame.image.load(path)
     
     def show_turn(self):
+        """Show the turn of the character by scaling its image and adjusting position."""
         if not self.shown_turn:
             self.rect.x -= 10
             self.rect.y -= 10
@@ -48,6 +72,7 @@ class BattleCard(pygame.sprite.Sprite):
             self.shown_turn = True
     
     def end_turn(self):
+        """End the turn of the character by restoring its original image and position."""
         if self.shown_turn:
             self.rect.x += 10
             self.rect.y += 10
@@ -55,6 +80,13 @@ class BattleCard(pygame.sprite.Sprite):
             self.shown_turn = False
 
     def attack(self, target, ability):
+        """
+        Perform an attack on the target character using a given ability.
+
+        Args:
+            target (BattleCard): The target character of the attack.
+            ability (Abilities): The ability used for the attack.
+        """
         damage = random.randint(0, ability.damage)
         target.current_hp -= damage
         if target.current_hp < 1:
@@ -65,11 +97,27 @@ class BattleCard(pygame.sprite.Sprite):
 
 
 class Battle:
+    """
+    A class representing a battle sequence.
+
+    Attributes:
+        surface (pygame.Surface): The display surface where the battle is rendered.
+        sprites (pygame.sprite.Group): Group containing all sprites involved in the battle.
+    """
+
     def __init__(self, surface, sprites):
+        """
+        Initialize the Battle object.
+
+        Args:
+            surface (pygame.Surface): The display surface where the battle is rendered.
+            sprites (pygame.sprite.Group): Group containing all sprites involved in the battle.
+        """
         self.display_surface = surface
         self.sprites = sprites
 
     def run(self):
+        """Renders the battle sequence."""
         background = pygame.image.load('graphics/background.png')
         self.display_surface.blit(background, (0, 0))
         self.sprites.draw(self.display_surface)
