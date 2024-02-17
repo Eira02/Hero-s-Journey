@@ -50,6 +50,9 @@ class Level:
 
     def run(self):
         # run the entire level
+        background = pygame.image.load('graphics/background.png')
+        self.display_surface.blit(background, (0, 0))
+
         self.forest_sprites.draw(self.display_surface)
         self.meadow_sprites.draw(self.display_surface)
         self.path_sprites.draw(self.display_surface)

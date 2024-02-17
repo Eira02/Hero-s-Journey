@@ -8,11 +8,6 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load('graphics/player.png')
         self.rect = self.image.get_rect(center = player_pos)
 
-    def center_player(self, map_tiles, mouse_pos):
-        for tile in map_tiles:
-            if tile.rect.collidepoint(mouse_pos) and tile.is_flipped:
-                self.rect.center = tile.rect.center
-
     def focus_camera(self, screen, all_sprites):
         offset_x = screen.get_size()[0] // 2 - self.rect.centerx
         offset_y = screen.get_size()[1] // 2 - self.rect.centery
@@ -36,9 +31,9 @@ class Player(pygame.sprite.Sprite):
 def keyboard_camera_control(all_sprites):
     keys = pygame.key.get_pressed()
     
-    speed = 10
+    speed = 40
     if keys[pygame.K_LSHIFT]:
-        speed = 20
+        speed = 120
 
     if keys[pygame.K_LEFT]:
         for sprite in all_sprites:

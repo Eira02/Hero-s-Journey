@@ -1,3 +1,8 @@
+fps = 60
+
+screen_width = 1500
+screen_height = 700
+
 tile_width = 106
 tile_height = 154
 
